@@ -23,7 +23,8 @@ class Index extends React.Component {
     e.preventDefault();
     const { email, password } = this.state.account;
     const data = await authService.login(email, password);
-    const token = await data.token;
+    const jwt = await data.token;
+    localStorage.setItem("token", jwt);
   };
 
   render() {
