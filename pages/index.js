@@ -8,6 +8,16 @@ class Index extends React.Component {
     }
   };
 
+  handleChange = e => {
+    const account = { ...this.state.account };
+    account[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ account });
+  };
+
+  handleSubmit = e => {
+    e.preventDefault();
+  };
+
   render() {
     const { account } = this.state;
 
@@ -26,11 +36,13 @@ class Index extends React.Component {
         </h1>
 
         <div className="container">
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
               <input
                 value={account.email}
+                onChange={this.handleChange}
+                name="email"
                 type="email"
                 className="form-control"
                 id="email"
@@ -40,6 +52,8 @@ class Index extends React.Component {
               <label htmlFor="password">Password</label>
               <input
                 value={account.password}
+                onChange={this.handleChange}
+                name="password"
                 type="password"
                 className="form-control"
                 id="password"
