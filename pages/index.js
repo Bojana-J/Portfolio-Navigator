@@ -1,4 +1,9 @@
 import Head from "next/head";
+import fetch from "isomorphic-unfetch";
+import { authService } from "../services/authService";
+
+//   warren.buffet@willandskill.se
+//   berkshirehathaway2018
 
 class Index extends React.Component {
   state = {
@@ -14,8 +19,11 @@ class Index extends React.Component {
     this.setState({ account });
   };
 
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
+    const { email, password } = this.state.account;
+    const data = await authService.login(email, password);
+    const token = await data.token;
   };
 
   render() {
