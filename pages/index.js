@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Router from "next/router";
 import fetch from "isomorphic-unfetch";
 import { authService } from "../services/authService";
 
@@ -25,6 +26,7 @@ class Index extends React.Component {
     const data = await authService.login(email, password);
     const jwt = await data.token;
     localStorage.setItem("token", jwt);
+    Router.push("/portfolio");
   };
 
   render() {
