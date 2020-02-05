@@ -1,9 +1,16 @@
 import Head from "next/head";
 
 class Index extends React.Component {
-  state = {};
+  state = {
+    account: {
+      email: "",
+      password: ""
+    }
+  };
 
   render() {
+    const { account } = this.state;
+
     return (
       <div>
         <Head>
@@ -22,11 +29,21 @@ class Index extends React.Component {
           <form>
             <div className="form-group">
               <label htmlFor="email">Email address</label>
-              <input type="email" className="form-control" id="email" />
+              <input
+                value={account.email}
+                type="email"
+                className="form-control"
+                id="email"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
-              <input type="password" className="form-control" id="password" />
+              <input
+                value={account.password}
+                type="password"
+                className="form-control"
+                id="password"
+              />
             </div>
             <button type="submit" className="btn btn-primary">
               Sign in
