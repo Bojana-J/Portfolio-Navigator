@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Router from "next/router";
+import Layout from "../components/Layout";
 
 class Portfolio extends React.Component {
   state = {
@@ -29,36 +30,38 @@ class Portfolio extends React.Component {
 
   render() {
     return (
-      <div>
-        <h1>Portfolio</h1>
-        <button onClick={this.handleClick}>click me</button>
+      <Layout>
+        <div>
+          <h1>Portfolio</h1>
+          <button onClick={this.handleClick}>click me</button>
 
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Account</th>
-              <th>Alias</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.portfolio.map(result => (
+          <table className="table">
+            <thead>
               <tr>
-                <th>{result.name}</th>
-                <th>{result.account_number}</th>
-                <th>
-                  <Link
-                    href="/detail/[result.alias]"
-                    as={`/detail/${result.alias}`}
-                  >
-                    <a>Click for more Details</a>
-                  </Link>
-                </th>
+                <th>Name</th>
+                <th>Account</th>
+                <th>Alias</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {this.state.portfolio.map(result => (
+                <tr>
+                  <th>{result.name}</th>
+                  <th>{result.account_number}</th>
+                  <th>
+                    <Link
+                      href="/detail/[result.alias]"
+                      as={`/detail/${result.alias}`}
+                    >
+                      <a>Click for more Details</a>
+                    </Link>
+                  </th>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Layout>
     );
   }
 }

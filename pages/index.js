@@ -1,7 +1,7 @@
-import Head from "next/head";
 import Router from "next/router";
 import fetch from "isomorphic-unfetch";
 import { authService } from "../services/authService";
+import Layout from "../components/Layout";
 
 //   warren.buffet@willandskill.se
 //   berkshirehathaway2018
@@ -34,49 +34,43 @@ class Index extends React.Component {
     const { account } = this.state;
 
     return (
-      <div>
-        <Head>
-          <title>WillandSkill</title>
-          <link
-            rel="stylesheet"
-            href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/minty/bootstrap.min.css"
-          />
-        </Head>
+      <Layout>
+        <div>
+          <h1>
+            Welcome to <br /> Will&Skill
+          </h1>
 
-        <h1>
-          Welcome to <br /> Will&Skill
-        </h1>
-
-        <div className="container">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="email">Email address</label>
-              <input
-                value={account.email}
-                onChange={this.handleChange}
-                name="email"
-                type="email"
-                className="form-control"
-                id="email"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <input
-                value={account.password}
-                onChange={this.handleChange}
-                name="password"
-                type="password"
-                className="form-control"
-                id="password"
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Sign in
-            </button>
-          </form>
+          <div className="container">
+            <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="email">Email address</label>
+                <input
+                  value={account.email}
+                  onChange={this.handleChange}
+                  name="email"
+                  type="email"
+                  className="form-control"
+                  id="email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  value={account.password}
+                  onChange={this.handleChange}
+                  name="password"
+                  type="password"
+                  className="form-control"
+                  id="password"
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Sign in
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

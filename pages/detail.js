@@ -1,7 +1,7 @@
 // import { useParams} from 'react';
 // import { useRouter } from 'next/router';
 import axios from "axios";
-import Head from "next/head";
+import Layout from "../components/Layout";
 
 class Detail extends React.Component {
   state = {
@@ -46,125 +46,129 @@ class Detail extends React.Component {
     const { position } = this.state;
 
     return (
-      <div>
-        <button onClick={this.handleClick}>get more details</button>
-
-        <table className="table">
-          <thead className="thead-dark">
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Key</th>
-              <th scope="col">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Name</td>
-              <td>{detail.name}</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Account</td>
-              <td>{detail.account_number}</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>Provider</td>
-              <td>{detail.provider}</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>Currency</td>
-              <td>{detail.currency}</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>Positions</td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-
+      <Layout>
         <div>
-          <p>Show all positions</p>
+          <button onClick={this.handleClick}>get more details</button>
+
           <table className="table">
             <thead className="thead-dark">
               <tr>
-                {position.map((position, index) => (
-                  <th>
-                    <td>{Object.keys(position)[index]}</td>
-                  </th>
-                ))}
+                <th scope="col">#</th>
+                <th scope="col">Key</th>
+                <th scope="col">Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Name</td>
+                <td>{detail.name}</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Account</td>
+                <td>{detail.account_number}</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Provider</td>
+                <td>{detail.provider}</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>Currency</td>
+                <td>{detail.currency}</td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>Positions</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
 
-                {/* <th scope="col">#</th>
+          <div>
+            <p>Show all positions</p>
+            <table className="table">
+              <thead className="thead-dark">
+                <tr>
+                  {position.map((position, index) => (
+                    <th>
+                      <td>{Object.keys(position)[index]}</td>
+                    </th>
+                  ))}
+
+                  {/* <th scope="col">#</th>
                 <th scope="col">1a</th> */}
-              </tr>
-            </thead>
-            <tbody>
-              {position.map((position, index) => (
-                <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{position.instrument.id}</td>
-                  <td>{position.instrument.rating}</td>
-                  <td>{position.instrument.identifier}</td>
-                  <td>{position.instrument.name}</td>
-                  <td>{position.instrument.currency}</td>
-                  <td>{position.instrument.country}</td>
-                  <td>{position.instrument.symbol}</td>
-                  <td>{position.acquisition_price}</td>
-                  <td>{position.allocation}</td>
-                  <td>{position.kind}</td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {position.map((position, index) => (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{position.instrument.id}</td>
+                    <td>{position.instrument.rating}</td>
+                    <td>{position.instrument.identifier}</td>
+                    <td>{position.instrument.name}</td>
+                    <td>{position.instrument.currency}</td>
+                    <td>{position.instrument.country}</td>
+                    <td>{position.instrument.symbol}</td>
+                    <td>{position.acquisition_price}</td>
+                    <td>{position.allocation}</td>
+                    <td>{position.kind}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <div>
-          <p>Filter by Acquisition Price</p>
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">part </th>
-                <th scope="col">2</th>
-              </tr>
-            </thead>
-            <tbody>
-              {position.map((position, index) => (
+          <div>
+            <p>Filter by Acquisition Price</p>
+            <table className="table">
+              <thead className="thead-dark">
                 <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{Object.keys(position)[1]}</td>
-                  <td>{position.acquisition_price}</td>
+                  <th scope="col">#</th>
+                  <th scope="col">part </th>
+                  <th scope="col">2</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+              </thead>
+              <tbody>
+                {position.map((position, index) => (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{Object.keys(position)[1]}</td>
+                    <td>{position.acquisition_price}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
-        <div className="anc">
-          <p>Filter by Allocation</p>
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">part </th>
-                <th scope="col">3</th>
-              </tr>
-            </thead>
-            <tbody>
-              {position.map((position, index) => (
+          <div className="anc">
+            <p>Filter by Allocation</p>
+            <table className="table">
+              <thead className="thead-dark">
                 <tr>
-                  <th scope="row">{index + 1}</th>
-                  <td>{Object.keys(position)[2]}</td>
-                  <td>{position.allocation}</td>
+                  <th scope="col">#</th>
+                  <th scope="col">part </th>
+                  <th scope="col">3</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {position.map((position, index) => (
+                  <tr>
+                    <th scope="row">{index + 1}</th>
+                    <td>{Object.keys(position)[2]}</td>
+                    <td>{position.allocation}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/*///// */}
         </div>
-      </div>
+      </Layout>
     );
   }
 }
