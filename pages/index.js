@@ -5,6 +5,7 @@ import { authService } from "../services/authService";
 
 //   warren.buffet@willandskill.se
 //   berkshirehathaway2018
+//   1d16a367-6a94-4304-bbd8-cb04b1f2d9a9
 
 class Index extends React.Component {
   state = {
@@ -26,7 +27,7 @@ class Index extends React.Component {
     const data = await authService.login(email, password);
     const jwt = await data.token;
     localStorage.setItem("token", jwt);
-    Router.push("/portfolio");
+    Router.push("/portfolio/");
   };
 
   render() {
