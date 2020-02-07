@@ -9,7 +9,7 @@ class Portfolio extends React.Component {
     portfolio: []
   };
 
-  handleClick = async e => {
+  async componentDidMount() {
     /////// DESTRUCTURE URL LINK
     const jwt = localStorage.getItem("token");
     const { data } = await axios.get(
@@ -26,34 +26,30 @@ class Portfolio extends React.Component {
 
     const obj1 = portfolio[0];
     console.log(obj1);
-  };
+  }
 
   render() {
     return (
       <Layout>
         <div>
-          <h1>Portfolio</h1>
-          <button onClick={this.handleClick}>click me</button>
+          <h1>Portfolios</h1>
 
           <table className="table">
-            <thead>
+            <thead className="thead-dark">
               <tr>
                 <th>Name</th>
                 <th>Account</th>
-                <th>Alias</th>
+                <th>Details</th>
               </tr>
             </thead>
             <tbody>
               {this.state.portfolio.map(result => (
-                <tr>
+                <tr key={result.alias}>
                   <th>{result.name}</th>
                   <th>{result.account_number}</th>
                   <th>
-                    <Link
-                      href="/detail/[result.alias]"
-                      as={`/detail/${result.alias}`}
-                    >
-                      <a>Click for more Details</a>
+                    <Link href={`/detail?alias=${result.alias}`}>
+                      <a>Click here for more Details</a>
                     </Link>
                   </th>
                 </tr>
