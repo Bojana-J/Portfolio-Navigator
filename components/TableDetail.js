@@ -11,20 +11,15 @@ const TableDetail = props => {
         </thead>
         <tbody>
           {Object.keys(data).map(key => (
-            <tr className="thead-dark" key={data.identifier}>
+            <tr className="thead-dark" key={key}>
               <td>{key}</td>
-
-              {/* If the value is empty or equal to null display dash " - " instead of empty field */}
-              {data[key] === null || data[key] === "" ? (
-                <td> - </td>
-              ) : // link/anchor to positions table
-              key === "positions" ? (
-                <td>
+              <td>
+                {key === "positions" && data[key] && data[key].length > 0 ? (
                   <a href="#positions"> List of Positions </a>
-                </td>
-              ) : (
-                <td>{data[key]}</td>
-              )}
+                ) : (
+                  data[key] || "-"
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

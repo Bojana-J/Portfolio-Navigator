@@ -1,11 +1,6 @@
 import Router from "next/router";
-import fetch from "isomorphic-unfetch";
 import { authService } from "../services/authService";
 import Layout from "../components/Layout";
-
-//   warren.buffet@willandskill.se
-//   berkshirehathaway2018
-//   1d16a367-6a94-4304-bbd8-cb04b1f2d9a9
 
 class Index extends React.Component {
   state = {
@@ -27,7 +22,7 @@ class Index extends React.Component {
     const data = await authService.login(email, password);
     const jwt = await data.token;
     localStorage.setItem("token", jwt);
-    Router.push("/portfolio/");
+    Router.push("/portfolios/");
   };
 
   render() {
@@ -35,7 +30,7 @@ class Index extends React.Component {
 
     return (
       <Layout>
-        <div>
+        <div className="div">
           <h1>
             Welcome to <br /> Will&Skill
           </h1>
@@ -70,6 +65,19 @@ class Index extends React.Component {
             </form>
           </div>
         </div>
+        <style jsx>
+          {`
+            .div {
+              margin: auto;
+              padding-top: 5%;
+              max-width: 600px;
+            }
+            h1 {
+              text-align: center;
+              padding-bottom: 5%;
+            }
+          `}
+        </style>
       </Layout>
     );
   }

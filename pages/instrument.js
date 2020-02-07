@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import axios from "axios";
-
 import Layout from "../components/Layout";
 import TableInstrument from "../components/TableInstrument";
-
+import { apiService } from "../services/apiService";
 
 const Instrument = () => {
   const [state, setState] = useState({
@@ -12,23 +10,11 @@ const Instrument = () => {
   });
 
   const router = useRouter();
-  const {id} = router.query;
-  console.log('this is', id);
-  
+  const { id } = router.query;
 
   const fetchData = async id => {
-    const jwt = localStorage.getItem("token");
-    const { data } = await axios.get(
-      `https://beta.stockzoom.com/api/v1/instruments/${id}/`,
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
-      }
-    );
-    setState({
-      data
-    });
+    const data = await apiService.getInstrument(id);
+    setState({ data });
   };
 
   useEffect(() => {
@@ -40,15 +26,10 @@ const Instrument = () => {
   return (
     <Layout>
       <div>
-        <h2>
-          Instrument with the id:
-          <br />
-          <span>{state.data.id}</span>
-        </h2>
+        <h2 className="mx-2 my-3">Instrument Details</h2>
         <div>
           <TableInstrument data={state.data} />
         </div>
-       
       </div>
     </Layout>
   );

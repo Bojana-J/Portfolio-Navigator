@@ -1,65 +1,45 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
+import { useRouter } from "next/router";
 import Layout from "../components/Layout";
+import TableDetail from "../components/TableDetail";
+import TablePosition from "../components/TablePosition";
+import { apiService } from "../services/apiService";
 
-class Portfolio extends React.Component {
-  state = {
-    portfolio: []
+const Portfolio = () => {
+  const [state, setState] = useState({
+    data: ""
+  });
+
+  const router = useRouter();
+  const { alias } = router.query;
+
+  const fetchData = async alias => {
+    const data = await apiService.getPortfolio(alias);
+    setState({ data });
   };
 
-  async componentDidMount() {
-    /////// DESTRUCTURE URL LINK
-    const jwt = localStorage.getItem("token");
-    const { data } = await axios.get(
-      "https://beta.stockzoom.com/api/v1/me/portfolios/",
-      {
-        headers: {
-          Authorization: `Bearer ${jwt}`
-        }
-      }
-    );
+  useEffect(() => {
+    if (alias) {
+      fetchData(alias);
+    }
+  }, [alias]);
 
-    const { results: portfolio } = data;
-    this.setState({ portfolio });
-
-    const obj1 = portfolio[0];
-    console.log(obj1);
-  }
-
-  render() {
-    return (
-      <Layout>
-        <div>
-          <h1>Portfolios</h1>
-
-          <table className="table">
-            <thead className="thead-dark">
-              <tr>
-                <th>Name</th>
-                <th>Account</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.portfolio.map(result => (
-                <tr key={result.alias}>
-                  <th>{result.name}</th>
-                  <th>{result.account_number}</th>
-                  <th>
-                    <Link href={`/detail?alias=${result.alias}`}>
-                      <a>Click here for more Details</a>
-                    </Link>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+  return (
+    <Layout>
+      <div>
+        <h2 className="mx-2 my-3">Portfolio Details</h2>
+        <div className="mb-5">
+          <TableDetail data={state.data} />
         </div>
-      </Layout>
-    );
-  }
-}
+        {state.data.positions && state.data.positions.length > 0 && (
+          <div id="positions">
+            <h2 className="mx-2 my-3">List of Positions</h2>
+            <TablePosition data={state.data} />
+          </div>
+        )}
+      </div>
+    </Layout>
+  );
+};
 
 export default Portfolio;

@@ -9,7 +9,6 @@ const TablePosition = props => {
         <table className="table">
           <thead className="thead-dark">
             <tr>
-            {/* Display keys in the heading */}
               {positions.map((position, index) => (
                 <th key={index}>{Object.keys(position)[index - 1]}</th>
               ))}
@@ -19,8 +18,6 @@ const TablePosition = props => {
             {positions.map((positions, index) => (
               <tr key={positions.instrument.id} >
                 <th scope="row">{index + 1}</th>
-                
-            {/* Link to Instruments with the unique ID */}
                 <td>
                   <Link href={`/instrument?id=${positions.instrument.id}`}>
                     <a>Instrument id {positions.instrument.id} </a>
