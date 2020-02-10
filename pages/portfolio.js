@@ -4,7 +4,7 @@ import Layout from "../components/Layout";
 import TableDetail from "../components/TableDetail";
 import TablePosition from "../components/TablePosition";
 import { apiService } from "../services/apiService";
-import MainChart from "../services/chart";
+import MainChart from "../components/MainChart";
 
 const Portfolio = () => {
   const [state, setState] = useState({
