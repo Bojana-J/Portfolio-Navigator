@@ -1,9 +1,10 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Layout from "../components/Layout";
 import TableDetail from "../components/TableDetail";
 import TablePosition from "../components/TablePosition";
 import { apiService } from "../services/apiService";
+import MainChart from "../services/chart";
 
 const Portfolio = () => {
   const [state, setState] = useState({
@@ -26,7 +27,7 @@ const Portfolio = () => {
 
   return (
     <Layout>
-      <div>
+      <div className="container">
         <h2 className="mx-2 my-3">Portfolio Details</h2>
         <div className="mb-5">
           <TableDetail data={state.data} />
@@ -37,6 +38,11 @@ const Portfolio = () => {
             <TablePosition data={state.data} />
           </div>
         )}
+      </div>
+      <div>
+        <div>
+          <MainChart data={state.data}></MainChart>
+        </div>
       </div>
     </Layout>
   );
