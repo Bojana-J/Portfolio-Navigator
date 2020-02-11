@@ -4,9 +4,9 @@ const TablePosition = props => {
   const { positions } = props.data;
 
   return (
-    <div>
+    <div className="table-responsive">
       {positions ? (
-        <table className="table">
+        <table className="table table-hover">
           <thead className="thead-dark">
             <tr>
               {positions.map((position, index) => (
@@ -16,7 +16,7 @@ const TablePosition = props => {
           </thead>
           <tbody>
             {positions.map((positions, index) => (
-              <tr key={positions.instrument.id} >
+              <tr key={positions.instrument.id}>
                 <th scope="row">{index + 1}</th>
                 <td>
                   <Link href={`/instrument?id=${positions.instrument.id}`}>

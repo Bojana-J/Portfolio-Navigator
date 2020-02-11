@@ -2,7 +2,7 @@ const TableInstrument = props => {
   const { data } = props;
 
   return (
-    <div >
+    <div>
       {data ? (
         <table className="table">
           <thead className="thead-dark"></thead>
@@ -12,7 +12,7 @@ const TableInstrument = props => {
                 <td>{index + 1}</td>
                 <th>{key}</th>
                 <td className="col-4">
-                  {(key === "company" && data.company)
+                  {key === "company" && data.company
                     ? data.company.description
                     : data[key] || "-"}
                 </td>
